@@ -1,10 +1,9 @@
 # Project-for-heads-and-hands
 
 ## Ник в Telegram
-**@SergeiBrin**
+[@SergeiBrin](https://t.me/sergeibrin)  
 
-## Ссылка на Telegram
-https://t.me/sergeibrin
+  
 
 ## EDT схема
 ![Cхема](https://github.com/SergeiBrin/project-for-heads-and-hands/blob/main/hero-vs-monsters.png)
@@ -54,5 +53,7 @@ PATCH http://localhost:8080/hero/recovery/{heroId}
 ```
 GET http://localhost:8080/statistics/{heroId}
 ```
+## Основные технологии
+Java 17, Maven, Spring Boot 3.1.4, Postgres, Hibernate. 
 
 
