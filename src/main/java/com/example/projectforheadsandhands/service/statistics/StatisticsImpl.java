@@ -36,7 +36,8 @@ public class StatisticsImpl implements Statistics {
         Long lose = statisticsRepository.countByHeroIdAndResult(heroId, false);
 
         BattleStatisticsDto battleStatisticsDto = BattleStatisticsMapper.buildBattleStatisticsDto(hero, win, lose);
-        log.info("");
+        log.info("Запрос в метод getStatistics(Long heroId) обработан успешно. " +
+                 "battleStatistics={}", battleStatisticsDto);
 
         return battleStatisticsDto;
     }
@@ -46,7 +47,9 @@ public class StatisticsImpl implements Statistics {
     public BattleStatistics addStatistics(Hero hero, Monster monster, Boolean result) {
         BattleStatistics buildBattleStatistics = BattleStatisticsMapper.buildBattleStatistics(hero, monster, result);
         BattleStatistics addBattleStatistics = statisticsRepository.save(buildBattleStatistics);
-        log.info("");
+        log.info("Запрос в метод addStatistics(Hero hero, Monster monster, Boolean result) " +
+                 "обработан успешно и данные добавлены в базу данных. " +
+                 "addBattleStatistics={}", addBattleStatistics);
 
         return addBattleStatistics;
     }

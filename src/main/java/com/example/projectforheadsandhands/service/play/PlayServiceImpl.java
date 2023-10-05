@@ -13,6 +13,7 @@ import com.example.projectforheadsandhands.service.hero.HeroService;
 import com.example.projectforheadsandhands.service.monster.MonsterService;
 import com.example.projectforheadsandhands.service.statistics.Statistics;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,7 @@ import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PlayServiceImpl implements PlayService {
     private final HeroService heroService;
     private final MonsterService monsterService;
@@ -45,6 +47,8 @@ public class PlayServiceImpl implements PlayService {
         List<Object> beings = new ArrayList<>();
         beings.add(createHero);
         beings.add(createMonsters);
+        log.info("Запрос в метод createNewGame(String type, String comp, Integer count, HeroNameDto heroDto) " +
+                 "обработан успешно. beings={}",beings);
 
         return beings;
     }
@@ -71,6 +75,8 @@ public class PlayServiceImpl implements PlayService {
         } else {
             resultDto = startBattle(monster, hero);
         }
+        log.info("Запрос в метод createBattle(Long heroId, Long monsterId) обработан успешно. " +
+                 "result={}", resultDto);
 
         return resultDto;
     }

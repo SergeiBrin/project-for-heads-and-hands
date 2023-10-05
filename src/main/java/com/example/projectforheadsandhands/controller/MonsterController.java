@@ -19,15 +19,17 @@ public class MonsterController {
 
     @GetMapping("/{monsterId}")
     public ResponseEntity<Monster> findMonsterById(@PathVariable Long monsterId) {
-        log.info("");
+        log.info("Поступил GET запрос в MonsterController, метод findMonsterById(Long monsterId). " +
+                "monsterId={}", monsterId);
         Monster getMonster = monsterService.findMonsterById(monsterId);
         return new ResponseEntity<>(getMonster, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<Monster>> findHeroes(@RequestParam(defaultValue = "0") Integer pageNumber,
-                                                    @RequestParam(defaultValue = "10") Integer pageSize) {
-        log.info("");
+    public ResponseEntity<List<Monster>> findMonsters(@RequestParam(defaultValue = "0") Integer pageNumber,
+                                                      @RequestParam(defaultValue = "10") Integer pageSize) {
+        log.info("Поступил GET запрос в MonsterController, метод findMonsters(Integer pageNumber, Integer pageSize). " +
+                "pageNumber={}, pageSize={}", pageNumber, pageSize);
         List<Monster> findMonsters = monsterService.findMonsters(pageNumber, pageSize);
 
         return new ResponseEntity<>(findMonsters, HttpStatus.OK);

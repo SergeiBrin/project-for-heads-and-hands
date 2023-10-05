@@ -28,8 +28,12 @@ public class MonsterServiceImpl implements MonsterService {
     @Transactional(readOnly = true)
     @Override
     public Monster findMonsterById(Long monsterId) {
-        return monsterRepository.findById(monsterId)
+        Monster findMonster =  monsterRepository.findById(monsterId)
                 .orElseThrow(() -> new NotFoundException(String.format("Монстра с id=%d не существует", monsterId)));
+        log.info("Запрос в метод findMonsterById(Long monsterId) обработан успешно. " +
+                 "findMonster={}", findMonster);
+
+        return findMonster;
     }
 
     @Transactional(readOnly = true)
@@ -37,7 +41,8 @@ public class MonsterServiceImpl implements MonsterService {
     public List<Monster> findMonsters(Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         List<Monster> findMonsters = monsterRepository.findAll(pageable).getContent();
-        log.info("");
+        log.info("Запрос в метод findMonsters(Integer pageNumber, Integer pageSize) обработан успешно. " +
+                 "findMonsters={}", findMonsters);
 
         return findMonsters;
     }
@@ -60,7 +65,9 @@ public class MonsterServiceImpl implements MonsterService {
         }
 
         List<Monster> createMonsters = monsterRepository.saveAll(monsters);
-        log.info("");
+        log.info("Запрос в метод createNewMonsters(Hero hero, String comp, Integer count) " +
+                 "обработан успешно и данные добавлены в базу данных. " +
+                 "createMonsters={}", createMonsters);
 
         return createMonsters;
     }
@@ -69,7 +76,9 @@ public class MonsterServiceImpl implements MonsterService {
     @Override
     public Monster putMonster(Monster monster) {
         Monster updateMonster = monsterRepository.save(monster);
-        log.info("");
+        log.info("Запрос в метод putMonster(Monster monster) " +
+                 "обработан успешно и данные добавлены в базу данных. " +
+                 "updateMonster={}", updateMonster);
 
         return updateMonster;
     }
@@ -78,7 +87,7 @@ public class MonsterServiceImpl implements MonsterService {
     @Override
     public void deleteAll() {
         monsterRepository.deleteAll();
-        log.info("");
+        log.info("Запрос в метод deleteAll() обработан успешно");
     }
 
     private List<Monster> buildEasyMonsters(Hero hero, Integer count) {

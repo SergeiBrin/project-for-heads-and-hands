@@ -28,8 +28,12 @@ public class HeroServiceImpl implements HeroService {
     @Transactional(readOnly = true)
     @Override
     public Hero findHeroById(Long heroId) {
-        return heroRepository.findById(heroId)
+        Hero findHero = heroRepository.findById(heroId)
                 .orElseThrow(() -> new NotFoundException(String.format("Героя с id=%d не существует", heroId)));
+        log.info("Запрос в метод findHeroById(Long heroId) обработан успешно. " +
+                 "findHero={}", findHero);
+
+        return findHero;
     }
 
     @Transactional(readOnly = true)
@@ -37,7 +41,8 @@ public class HeroServiceImpl implements HeroService {
     public List<Hero> findHeroes(Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         List<Hero> findHeroes = heroRepository.findAll(pageable).getContent();
-        log.info("");
+        log.info("Запрос в метод findHeroes(Integer pageNumber, Integer pageSize) обработан успешно. " +
+                 "findHeroes={}", findHeroes);
 
         return findHeroes;
     }
@@ -86,19 +91,12 @@ public class HeroServiceImpl implements HeroService {
             highDamage = random.nextInt(lowDamage, 7);
         }
 
-        Hero buildHero = Hero.builder()
-                .name(heroDto.getName())
-                .attack(attack)
-                .defense(defence)
-                .health(health)
-                .originalHealth(health)
-                .lowDamage(lowDamage)
-                .highDamage(highDamage)
-                .recovery(4)
-                .build();
-
+        Hero buildHero = HeroMapper.buildHero(heroDto, attack, defence, health, lowDamage, highDamage, 4);
         Hero createHero = heroRepository.save(buildHero);
-        log.info("");
+        log.info("Запрос в метод createHero(String type, String comp, HeroNameDto heroDto) " +
+                 "обработан успешно и добавлен в базу данных. " +
+                 "createHero={}", createHero);
+
         return createHero;
     }
 
@@ -112,7 +110,10 @@ public class HeroServiceImpl implements HeroService {
         hero.setHealth(recovery);
         hero.setRecovery(hero.getRecovery() - 1);
         Hero updateHero = heroRepository.save(hero);
-        log.info("");
+
+        log.info("Запрос в метод recoveryHero(Long heroId) " +
+                 "обработан успешно и добавлен в базу данных. " +
+                 "updateHero={}", updateHero);
 
         return HeroMapper.buildShortHeroDto(updateHero);
     }
@@ -121,7 +122,10 @@ public class HeroServiceImpl implements HeroService {
     @Override
     public Hero putHero(Hero hero) {
         Hero updateHero = heroRepository.save(hero);
-        log.info("");
+        log.info("Запрос в метод putHero(Hero hero) " +
+                 "обработан успешно и данные добавлены в базу данных. " +
+                 "updateHero={}", updateHero);
+
         return updateHero;
     }
 
@@ -129,7 +133,7 @@ public class HeroServiceImpl implements HeroService {
     @Override
     public void deleteAll() {
         heroRepository.deleteAll();
-        log.info("");
+        log.info("Запрос в метод deleteAll() обработан успешно.");
     }
 
     private int getRecovery(Long heroId, Hero hero) {

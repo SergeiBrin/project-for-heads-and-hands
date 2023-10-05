@@ -24,7 +24,9 @@ public class PlayController {
                                                       @RequestParam(required = false) String comp,
                                                       @RequestParam(defaultValue = "2") Integer count,
                                                       @Valid @RequestBody HeroNameDto heroDto) {
-        log.info("");
+        log.info("Поступил POST запрос в PlayController, " +
+                 "метод createNewGame(String type, String comp, Integer count, HeroNameDto heroDto). " +
+                 "type={}, comp={}, count={}, heroDto={}", type, comp, count, heroDto);
         List<Object> beings = playService.createNewGame(type, comp, count, heroDto);
 
         return new ResponseEntity<>(beings, HttpStatus.OK);
@@ -33,7 +35,9 @@ public class PlayController {
     @PostMapping("/battle/{heroId}/{monsterId}")
     public ResponseEntity<BattleResultDto> createBattle(@PathVariable Long heroId,
                                                         @PathVariable Long monsterId) {
-        log.info("");
+        log.info("Поступил POST запрос в PlayController, " +
+                "метод createBattle(Long heroId, Long monsterId). " +
+                "heroId={}, monsterId={}", heroId, monsterId);
         BattleResultDto battleResult = playService.createBattle(heroId, monsterId);
 
         return new ResponseEntity<>(battleResult, HttpStatus.OK);

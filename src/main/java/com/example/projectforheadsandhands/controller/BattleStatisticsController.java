@@ -20,7 +20,8 @@ public class BattleStatisticsController {
 
     @GetMapping("/{heroId}")
     public ResponseEntity<BattleStatisticsDto> getStatisticsForHero(@PathVariable Long heroId) {
-        log.info("");
+        log.info("Поступил GET запрос в BattleStatisticsController, метод getStatisticsForHero(Long heroId). " +
+                "heroId={}", heroId);
         BattleStatisticsDto getStatistics = battleStatistics.getStatistics(heroId);
 
         return new ResponseEntity<>(getStatistics, HttpStatus.OK);

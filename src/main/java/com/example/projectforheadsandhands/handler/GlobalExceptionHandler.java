@@ -15,28 +15,28 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ApiError> handleNotFoundException(NotFoundException e) {
-        log.error("");
+        log.error("Выброшено исключение NotFoundException. message={}", e.getMessage());
         ApiError apiError = new ApiError(e.getClass().getSimpleName(), e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
     }
 
     @ExceptionHandler(InvalidParamException.class)
     public ResponseEntity<ApiError> handleInvalidArgumentException(InvalidParamException e) {
-        log.error("");
+        log.error("Выброшено исключение InvalidArgumentException. message={}", e.getMessage());
         ApiError apiError = new ApiError(e.getClass().getSimpleName(), e.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
     }
 
     @ExceptionHandler(InvalidRecoveryException.class)
     public ResponseEntity<ApiError> handleInvalidRecoveryException(InvalidRecoveryException e) {
-        log.error("");
+        log.error("Выброшено исключение InvalidRecoveryException. message={}", e.getMessage());
         ApiError apiError = new ApiError(e.getClass().getSimpleName(), e.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiError> handleGeneralException(Exception e) {
-        log.error("");
+        log.error("Выброшено исключение Exception. message={}", e.getMessage());
         ApiError apiError = new ApiError(e.getClass().getSimpleName(), e.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiError);
     }

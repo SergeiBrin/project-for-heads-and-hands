@@ -20,7 +20,8 @@ public class HeroController {
 
     @GetMapping("/{heroId}")
     public ResponseEntity<Hero> findHeroById(@PathVariable Long heroId) {
-        log.info("");
+        log.info("Поступил GET запрос в HeroController, метод findHeroById(Long heroId). " +
+                "heroId={}", heroId);
         Hero getHero = heroService.findHeroById(heroId);
         return new ResponseEntity<>(getHero, HttpStatus.OK);
     }
@@ -28,7 +29,8 @@ public class HeroController {
     @GetMapping
     public ResponseEntity<List<Hero>> findHeroes(@RequestParam(defaultValue = "0") Integer pageNumber,
                                                  @RequestParam(defaultValue = "10") Integer pageSize) {
-        log.info("");
+        log.info("Поступил GET запрос в HeroController, метод findHeroes(Integer pageNumber, Integer pageSize). " +
+                "pageNumber={}, pageSize={}", pageNumber, pageSize);
         List<Hero> findHeroes = heroService.findHeroes(pageNumber, pageSize);
         return new ResponseEntity<>(findHeroes, HttpStatus.OK);
     }
@@ -36,7 +38,8 @@ public class HeroController {
     // исцелить героя до 4-х раз на 30% от изначального максимального уровня здоровья
     @PatchMapping("/recovery/{heroId}")
     public ResponseEntity<ShortHeroDto> healHero(@PathVariable(required = false) Long heroId) {
-        log.info("");
+        log.info("Поступил PATCH запрос в HeroController, метод healHero(Long heroId). " +
+                "heroId={}", heroId);
         ShortHeroDto healedHero = heroService.recoveryHero(heroId);
 
         return new ResponseEntity<>(healedHero, HttpStatus.OK);
