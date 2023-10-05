@@ -29,6 +29,7 @@ public class MonsterController {
                                                     @RequestParam(defaultValue = "10") Integer pageSize) {
         log.info("");
         List<Monster> findMonsters = monsterService.findMonsters(pageNumber, pageSize);
+
         return new ResponseEntity<>(findMonsters, HttpStatus.OK);
     }
 }

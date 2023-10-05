@@ -23,9 +23,6 @@ import java.util.Random;
 @Service
 @RequiredArgsConstructor
 public class PlayServiceImpl implements PlayService {
-    // private final HeroRepository heroRepository;
-    //private final MonsterRepository monsterRepository;
-    // private final BattleStatisticsRepository battleRepository;
     private final HeroService heroService;
     private final MonsterService monsterService;
     private final Statistics battleStatistics;

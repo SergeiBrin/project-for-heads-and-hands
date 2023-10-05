@@ -38,6 +38,7 @@ public class HeroController {
     public ResponseEntity<ShortHeroDto> healHero(@PathVariable(required = false) Long heroId) {
         log.info("");
         ShortHeroDto healedHero = heroService.recoveryHero(heroId);
+
         return new ResponseEntity<>(healedHero, HttpStatus.OK);
     }
 }

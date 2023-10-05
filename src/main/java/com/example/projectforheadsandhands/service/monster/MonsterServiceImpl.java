@@ -203,9 +203,4 @@ public class MonsterServiceImpl implements MonsterService {
 
         return monsters;
     }
-
-    private Monster findMonster(Long monsterId) {
-        return monsterRepository.findById(monsterId)
-                .orElseThrow(() -> new NotFoundException(String.format("Монстра с id=%d не существует", monsterId)));
-    }
 }

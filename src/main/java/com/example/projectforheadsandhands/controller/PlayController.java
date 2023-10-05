@@ -4,7 +4,6 @@ import com.example.projectforheadsandhands.model.dto.BattleResultDto;
 import com.example.projectforheadsandhands.model.dto.HeroNameDto;
 import com.example.projectforheadsandhands.service.play.PlayService;
 import jakarta.validation.Valid;
-import javax.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -27,6 +26,7 @@ public class PlayController {
                                                       @Valid @RequestBody HeroNameDto heroDto) {
         log.info("");
         List<Object> beings = playService.createNewGame(type, comp, count, heroDto);
+
         return new ResponseEntity<>(beings, HttpStatus.OK);
     }
 
@@ -35,6 +35,7 @@ public class PlayController {
                                                         @PathVariable Long monsterId) {
         log.info("");
         BattleResultDto battleResult = playService.createBattle(heroId, monsterId);
+
         return new ResponseEntity<>(battleResult, HttpStatus.OK);
     }
 }
