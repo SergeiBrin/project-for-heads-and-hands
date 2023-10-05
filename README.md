@@ -53,5 +53,7 @@ PATCH http://localhost:8080/hero/recovery/{heroId}
 ```
 GET http://localhost:8080/statistics/{heroId}
 ```
+## Основные технологии
+Java 17, Maven, Spring Boot 3.1.4, Postgres, Hibernate. 
 
 
