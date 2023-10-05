@@ -137,7 +137,8 @@ public class HeroServiceImpl implements HeroService {
             throw new InvalidRecoveryException(String.format("Герой с id=%d жив. Исцелить можно только мёртвого героя", heroId));
         }
         if (hero.getRecovery() == 0) {
-            throw new InvalidRecoveryException(String.format("Герой с id=%d исчерпал доступное количество исцелений", heroId));
+            throw new InvalidRecoveryException(String.format("Герой с id=%d исчерпал доступное количество исцелений " +
+                    "и отправился на небеса", heroId));
         }
 
         int originalHealth = hero.getOriginalHealth();
