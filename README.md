@@ -1,7 +1,9 @@
 # Project-for-heads-and-hands
 
 ## Ник в Telegram
-[@SergeiBrin](https://t.me/sergeibrin)
+[@SergeiBrin](https://t.me/sergeibrin)  
+
+  
 
 ## EDT схема
 ![Cхема](https://github.com/SergeiBrin/project-for-heads-and-hands/blob/main/hero-vs-monsters.png)
